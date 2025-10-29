@@ -4,7 +4,10 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "conc \"npm:dev:*\"",
+		"dev:db": "docker compose up",
+		"dev:db:studio": "drizzle-kit studio",
+		"dev:ui": "vite dev --open",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
@@ -20,6 +23,11 @@
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio"
+	},
+	"lint-staged": {
+		"package.json": "sort-package-json",
+		"*.{js,ts,svelte}": "eslint --fix",
+		"*": "prettier --ignore-unknown --write"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
@@ -37,8 +45,14 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.12.4",
 		"globals": "^16.4.0",
+		"eslint-plugin-boundaries": "^5.0.1",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
+		"eslint-plugin-sort-keys-fix": "^1.1.2",
 		"playwright": "^1.55.1",
 		"prettier": "^3.6.2",
+		"eslint-plugin-unused-imports": "^4.2.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.1.6",
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.6.14",
 		"svelte": "^5.39.5",
