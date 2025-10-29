@@ -1,33 +1,36 @@
 {
 	"name": "boutique-gym",
-	"private": true,
 	"version": "0.0.1",
+	"private": true,
 	"type": "module",
 	"scripts": {
+		"build": "vite build",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"db:auth:generate": "npx @better-auth/cli generate --output src/lib/server/db/auth-schema.ts",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:push": "drizzle-kit push",
+		"db:start": "docker compose up",
 		"dev": "conc \"npm:dev:*\"",
 		"dev:db": "docker compose up",
 		"dev:db:studio": "drizzle-kit studio",
 		"dev:ui": "vite dev --open",
-		"build": "vite build",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"test:unit": "vitest",
+		"prepare": "svelte-kit sync || echo ''; husky",
+		"preview": "vite preview",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright test",
-		"db:start": "docker compose up",
-		"db:push": "drizzle-kit push",
-		"db:generate": "drizzle-kit generate",
-		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"test:unit": "vitest"
 	},
 	"lint-staged": {
 		"package.json": "sort-package-json",
 		"*.{js,ts,svelte}": "eslint --fix",
 		"*": "prettier --ignore-unknown --write"
+	},
+	"dependencies": {
+		"postgres": "^3.4.7"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
@@ -43,16 +46,16 @@
 		"drizzle-orm": "^0.44.5",
 		"eslint": "^9.36.0",
 		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-svelte": "^3.12.4",
-		"globals": "^16.4.0",
 		"eslint-plugin-boundaries": "^5.0.1",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"eslint-plugin-sort-keys-fix": "^1.1.2",
-		"playwright": "^1.55.1",
-		"prettier": "^3.6.2",
+		"eslint-plugin-svelte": "^3.12.4",
 		"eslint-plugin-unused-imports": "^4.2.0",
+		"globals": "^16.4.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.6",
+		"playwright": "^1.55.1",
+		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.6.14",
 		"svelte": "^5.39.5",
@@ -64,8 +67,5 @@
 		"vite-plugin-devtools-json": "^1.0.0",
 		"vitest": "^3.2.4",
 		"vitest-browser-svelte": "^1.1.0"
-	},
-	"dependencies": {
-		"postgres": "^3.4.7"
 	}
 }
