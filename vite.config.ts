@@ -6,10 +6,13 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	plugins: [
-		paraglideVitePlugin({ outdir: './src/paraglide', project: './project.inlang' }),
+		paraglideVitePlugin({
+			outdir: './src/lib/paraglide',
+			project: './project.inlang',
+		}),
 		tailwindcss(),
 		sveltekit(),
-		devtoolsJson()
+		devtoolsJson(),
 	],
 	test: {
 		expect: { requireAssertions: true },
@@ -20,14 +23,14 @@ export default defineConfig({
 					browser: {
 						enabled: true,
 						instances: [{ browser: 'chromium' }],
-						provider: 'playwright'
+						provider: 'playwright',
 					},
 					environment: 'browser',
 					exclude: ['src/lib/server/**'],
 					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
 					name: 'client',
-					setupFiles: ['./vitest-setup-client.ts']
-				}
+					setupFiles: ['./vitest-setup-client.ts'],
+				},
 			},
 			{
 				extends: './vite.config.ts',
@@ -35,9 +38,9 @@ export default defineConfig({
 					environment: 'node',
 					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}'],
 					include: ['src/**/*.{test,spec}.{js,ts}'],
-					name: 'server'
-				}
-			}
-		]
-	}
+					name: 'server',
+				},
+			},
+		],
+	},
 });

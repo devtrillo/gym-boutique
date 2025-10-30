@@ -1,4 +1,5 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"example_message": "Hello world {username}"
+	"example_message": "Hello world {username}",
+	"nice_this_deer_boost": "to read the documentation"
 }
