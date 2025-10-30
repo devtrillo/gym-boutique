@@ -21,7 +21,6 @@
 		"machine-translate": "inlang machine translate --project project.inlang",
 		"prepare": "svelte-kit sync || echo ''; husky",
 		"preview": "vite preview",
-		"release": "standard-version",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
 		"test:e2e": "playwright test",
 		"test:unit": "vitest"
@@ -32,8 +31,7 @@
 		"*": "prettier --ignore-unknown --write"
 	},
 	"dependencies": {
-		"postgres": "^3.4.7",
-		"standard-version": "^9.5.0"
+		"postgres": "^3.4.7"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^20.1.0",
